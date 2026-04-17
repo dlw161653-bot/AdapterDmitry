@@ -5,17 +5,16 @@ Dmitry Mirnak Adapter
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <title>Dmitry Mirnak | Adapter</title>
     <style>
-        /* === БАЗОВЫЕ ПЕРЕМЕННЫЕ (будут меняться через JS) === */
         :root {
-            --bg: #030712;
-            --bg2: #0c1222;
-            --card: rgba(15, 23, 42, 0.78);
-            --line: rgba(148, 163, 184, 0.18);
-            --txt: #f1f5f9;
-            --muted: #94a3b8;
+            --bg: #000000;
+            --bg2: #0a0a0a;
+            --card: rgba(20, 20, 20, 0.85);
+            --line: rgba(100, 100, 100, 0.2);
+            --txt: #ffffff;
+            --muted: #a0a0a0;
             --accent: #38bdf8;
             --accent2: #818cf8;
-            --btn-bg: rgba(30, 41, 59, 0.45);
+            --btn-bg: rgba(40, 40, 40, 0.6);
         }
 
         * {
@@ -27,8 +26,8 @@ Dmitry Mirnak Adapter
         body {
             font-family: "Segoe UI", system-ui, sans-serif;
             color: var(--txt);
-            background: radial-gradient(ellipse 900px 500px at 10% -10%, rgba(56, 189, 248, 0.18), transparent),
-                        radial-gradient(ellipse 700px 400px at 100% 20%, rgba(129, 140, 248, 0.15), transparent),
+            background: radial-gradient(ellipse 900px 500px at 10% -10%, rgba(56, 189, 248, 0.15), transparent),
+                        radial-gradient(ellipse 700px 400px at 100% 20%, rgba(129, 140, 248, 0.12), transparent),
                         linear-gradient(165deg, var(--bg), var(--bg2));
             min-height: 100vh;
             display: flex;
@@ -36,11 +35,10 @@ Dmitry Mirnak Adapter
             justify-content: center;
             padding: 24px;
             margin: 0;
-            transition: background 0.3s ease, color 0.2s ease;
+            transition: background 0.5s ease, color 0.3s ease;
             position: relative;
         }
 
-        /* Видео-фон */
         .video-bg {
             position: fixed;
             top: 0;
@@ -51,19 +49,17 @@ Dmitry Mirnak Adapter
             z-index: -2;
         }
 
-        /* Затемнение для читаемости */
         .overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.45);
+            background: rgba(0, 0, 0, 0.5);
             z-index: -1;
             pointer-events: none;
         }
 
-        /* Кастомный фон — изображение */
         body.custom-bg-active {
             background: var(--custom-bg-url) center/cover fixed !important;
         }
@@ -72,7 +68,7 @@ Dmitry Mirnak Adapter
             content: "";
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0, 0, 0, 0.35);
+            background: rgba(0, 0, 0, 0.4);
             pointer-events: none;
             z-index: 0;
         }
@@ -83,10 +79,10 @@ Dmitry Mirnak Adapter
             margin: 0 auto;
             border-radius: 32px;
             border: 1px solid var(--line);
-            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255,255,255,0.04);
-            background: linear-gradient(145deg, var(--card), rgba(15, 23, 42, 0.75));
+            box-shadow: 0 25px 80px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255,255,255,0.05);
+            background: linear-gradient(145deg, var(--card), rgba(10, 10, 10, 0.8));
             padding: 30px 28px 28px;
-            backdrop-filter: blur(14px);
+            backdrop-filter: blur(16px);
             position: relative;
             z-index: 2;
         }
@@ -100,7 +96,7 @@ Dmitry Mirnak Adapter
             font-size: 2.3rem;
             font-weight: 800;
             letter-spacing: -0.02em;
-            background: linear-gradient(105deg, #e0f2fe, var(--accent2), #67e8f9);
+            background: linear-gradient(105deg, #ffffff, var(--accent2), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -137,11 +133,11 @@ Dmitry Mirnak Adapter
             font-size: 17px;
             backdrop-filter: blur(8px);
             transition: all 0.25s;
-            box-shadow: 0 8px 12px -6px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 12px -6px rgba(0, 0, 0, 0.4);
         }
 
         .link-btn:hover {
-            background: rgba(56, 189, 248, 0.12);
+            background: rgba(56, 189, 248, 0.15);
             border-color: var(--accent);
             transform: translateY(-3px);
         }
@@ -168,7 +164,6 @@ Dmitry Mirnak Adapter
             text-align: center;
         }
 
-        /* === ПАНЕЛЬ УПРАВЛЕНИЯ === */
         .control-panel {
             margin-top: 16px;
             border-top: 1px solid var(--line);
@@ -198,8 +193,13 @@ Dmitry Mirnak Adapter
 
         .ctrl-btn:hover {
             background: var(--accent);
-            color: #0f172a;
+            color: #000;
             border-color: var(--accent);
+        }
+
+        .ctrl-btn.active {
+            background: var(--accent);
+            color: #000;
         }
 
         .file-upload-wrapper {
@@ -224,7 +224,7 @@ Dmitry Mirnak Adapter
 
         audio {
             width: 100%;
-            height: 36px;
+            height: 40px;
             border-radius: 40px;
             background: var(--btn-bg);
             backdrop-filter: blur(8px);
@@ -234,23 +234,11 @@ Dmitry Mirnak Adapter
             background: var(--card);
         }
 
-        /* Блок кастомного фона */
         .custom-bg-panel {
             margin-top: 14px;
             display: flex;
             flex-direction: column;
             gap: 10px;
-        }
-
-        .custom-bg-panel input[type="text"] {
-            width: 100%;
-            padding: 12px 16px;
-            border-radius: 40px;
-            border: 1px solid var(--line);
-            background: var(--btn-bg);
-            color: var(--txt);
-            backdrop-filter: blur(8px);
-            outline: none;
         }
 
         .file-row {
@@ -273,10 +261,15 @@ Dmitry Mirnak Adapter
             padding-top: 18px;
         }
 
-        /* Кнопка сброса фона */
         .reset-bg-btn {
             background: rgba(239, 68, 68, 0.3);
             border-color: rgba(239, 68, 68, 0.5);
+        }
+
+        .status-badge {
+            font-size: 11px;
+            margin-left: 8px;
+            opacity: 0.8;
         }
 
         @media (max-width: 480px) {
@@ -291,7 +284,6 @@ Dmitry Mirnak Adapter
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body id="mainBody">
-    <!-- Видео-фон (будет добавляться динамически) -->
     <video id="videoBackground" class="video-bg" style="display: none;" loop muted playsinline></video>
     <div class="overlay" id="bgOverlay" style="display: none;"></div>
 
@@ -301,7 +293,6 @@ Dmitry Mirnak Adapter
             <div class="hero-sub">официальные ресурсы • official hub</div>
         </div>
 
-        <!-- Основные кнопки навигации -->
         <div class="nav-grid">
             <a href="https://t.me/+EcKt9k-7qYAxNjYy" target="_blank" class="link-btn"><div class="btn-left"><span>📢</span><span>Официальный канал</span></div><i class="fas fa-arrow-right"></i></a>
             <a href="https://t.me/+TnG7x-J649wwYzVi" target="_blank" class="link-btn"><div class="btn-left"><span>📣</span><span>Второй канал</span></div><i class="fas fa-arrow-right"></i></a>
@@ -311,37 +302,27 @@ Dmitry Mirnak Adapter
             <a href="https://t.me/toncools" target="_blank" class="link-btn"><div class="btn-left"><span>👤</span><span>Официальный аккаунт</span></div><i class="fas fa-arrow-right"></i></a>
         </div>
 
-        <!-- === ПАНЕЛЬ УПРАВЛЕНИЯ === -->
         <div class="control-panel">
-            <!-- Кнопка загрузки песни -->
             <div class="file-upload-wrapper">
                 <button class="ctrl-btn"><i class="fas fa-music"></i> Загрузить трек</button>
                 <input type="file" id="audioUpload" accept="audio/*">
             </div>
             
-            <!-- Кнопки тем -->
             <button class="ctrl-btn" id="themeDark"><i class="fas fa-moon"></i> Тёмная</button>
             <button class="ctrl-btn" id="themeLight"><i class="fas fa-sun"></i> Светлая</button>
-            <button class="ctrl-btn" id="themeCustom"><i class="fas fa-image"></i> Кастом фон</button>
+            <button class="ctrl-btn" id="themeCustom"><i class="fas fa-image"></i> Кастом</button>
             
-            <!-- Кнопка Random цвета -->
-            <button class="ctrl-btn" id="randomColorBtn"><i class="fas fa-dice"></i> Random</button>
+            <button class="ctrl-btn" id="randomColorBtn"><i class="fas fa-dice"></i> Авто-цвет <span class="status-badge" id="autoColorStatus">⚪</span></button>
         </div>
 
-        <!-- Аудио плеер -->
         <div id="audioPlayerContainer" class="audio-player" style="display: none;">
             <audio id="audioPlayer" controls></audio>
         </div>
 
-        <!-- === ПАНЕЛЬ КАСТОМНОГО ФОНА === -->
         <div id="customBgPanel" class="custom-bg-panel" style="display: none;">
-            <!-- Ссылка на картинку -->
-            <input type="text" id="bgUrlInput" placeholder="🔗 Вставь ссылку на картинку (URL)">
-            
-            <!-- Загрузка из галереи -->
             <div class="file-row">
                 <div class="file-upload-wrapper file-btn">
-                    <button class="ctrl-btn" style="width: 100%;"><i class="fas fa-image"></i> Картинка из галереи</button>
+                    <button class="ctrl-btn" style="width: 100%;"><i class="fas fa-image"></i> Фото из галереи</button>
                     <input type="file" id="imageUpload" accept="image/*">
                 </div>
                 <div class="file-upload-wrapper file-btn">
@@ -350,15 +331,13 @@ Dmitry Mirnak Adapter
                 </div>
             </div>
             
-            <!-- Кнопки управления -->
             <div style="display: flex; gap: 10px;">
-                <button class="ctrl-btn" id="applyBgBtn" style="flex: 1;"><i class="fas fa-check"></i> Применить</button>
-                <button class="ctrl-btn reset-bg-btn" id="resetBgBtn" style="flex: 1;"><i class="fas fa-times"></i> Сбросить</button>
+                <button class="ctrl-btn reset-bg-btn" id="resetBgBtn" style="flex: 1;"><i class="fas fa-times"></i> Сбросить фон</button>
             </div>
-            <p style="font-size: 12px; color: var(--muted); margin-top: 6px;">Видео будет проигрываться без звука на фоне</p>
+            <p style="font-size: 12px; color: var(--muted); margin-top: 6px; text-align: center;">Видео без звука • Фото растягивается</p>
         </div>
 
-        <div class="footer-note"><i class="fas fa-link"></i> dmitrymirnak • 2026 • v3.0</div>
+        <div class="footer-note"><i class="fas fa-link"></i> dmitrymirnak • 2026 • v4.0</div>
     </div>
 
     <script>
@@ -370,10 +349,45 @@ Dmitry Mirnak Adapter
             const videoBg = document.getElementById('videoBackground');
             const bgOverlay = document.getElementById('bgOverlay');
             
-            // === 1. ЗАГРУЗКА ПЕСНИ ===
+            // === СОХРАНЕНИЕ В LOCALSTORAGE ===
+            const STORAGE_KEYS = {
+                THEME: 'dmitry_theme',
+                BG_TYPE: 'dmitry_bg_type',
+                BG_DATA: 'dmitry_bg_data',
+                AUDIO_SRC: 'dmitry_audio_src',
+                AUDIO_TIME: 'dmitry_audio_time',
+                AUTO_COLOR: 'dmitry_auto_color'
+            };
+
+            let autoColorInterval = null;
+            let isAutoColorActive = false;
+
+            // === 1. ЗАГРУЗКА ПЕСНИ С СОХРАНЕНИЕМ ===
             const audioUpload = document.getElementById('audioUpload');
             const audioContainer = document.getElementById('audioPlayerContainer');
             const audioPlayer = document.getElementById('audioPlayer');
+
+            // Сохраняем позицию перед уходом
+            window.addEventListener('beforeunload', function() {
+                if (audioPlayer.src && !audioPlayer.paused) {
+                    localStorage.setItem(STORAGE_KEYS.AUDIO_TIME, audioPlayer.currentTime);
+                }
+                if (audioPlayer.src) {
+                    localStorage.setItem(STORAGE_KEYS.AUDIO_SRC, audioPlayer.src);
+                }
+            });
+
+            // Восстанавливаем аудио
+            const savedAudioSrc = localStorage.getItem(STORAGE_KEYS.AUDIO_SRC);
+            const savedAudioTime = localStorage.getItem(STORAGE_KEYS.AUDIO_TIME);
+            
+            if (savedAudioSrc) {
+                audioPlayer.src = savedAudioSrc;
+                audioContainer.style.display = 'block';
+                if (savedAudioTime) {
+                    audioPlayer.currentTime = parseFloat(savedAudioTime);
+                }
+            }
 
             audioUpload.addEventListener('change', function(e) {
                 const file = e.target.files[0];
@@ -382,101 +396,100 @@ Dmitry Mirnak Adapter
                     audioPlayer.src = url;
                     audioContainer.style.display = 'block';
                     audioPlayer.play();
+                    localStorage.setItem(STORAGE_KEYS.AUDIO_SRC, url);
                 }
             });
 
-            // === 2. ТЕМЫ ===
+            // Автосохранение позиции каждые 5 секунд
+            setInterval(() => {
+                if (audioPlayer.src && !audioPlayer.paused) {
+                    localStorage.setItem(STORAGE_KEYS.AUDIO_TIME, audioPlayer.currentTime);
+                }
+            }, 5000);
+
+            // === 2. ТЕМЫ (ТЁМНАЯ ТЕМНЕЕ / СВЕТЛАЯ СВЕТЛЕЕ) ===
             const themeDark = document.getElementById('themeDark');
             const themeLight = document.getElementById('themeLight');
             const themeCustom = document.getElementById('themeCustom');
             const customBgPanel = document.getElementById('customBgPanel');
-            const bgUrlInput = document.getElementById('bgUrlInput');
-            const applyBgBtn = document.getElementById('applyBgBtn');
             const resetBgBtn = document.getElementById('resetBgBtn');
             const imageUpload = document.getElementById('imageUpload');
             const videoUpload = document.getElementById('videoUpload');
 
-            // Сброс фона (убирает видео и картинку)
             function resetBackground() {
-                // Останавливаем видео
                 videoBg.pause();
                 videoBg.src = '';
                 videoBg.style.display = 'none';
                 bgOverlay.style.display = 'none';
-                
-                // Убираем класс кастомного фона
                 body.classList.remove('custom-bg-active');
                 body.style.removeProperty('--custom-bg-url');
-                
-                // Возвращаем тёмную тему как базу
-                setDarkTheme();
+                localStorage.removeItem(STORAGE_KEYS.BG_TYPE);
+                localStorage.removeItem(STORAGE_KEYS.BG_DATA);
             }
 
-            // Тёмная тема
             function setDarkTheme() {
                 resetBackground();
-                root.style.setProperty('--bg', '#030712');
-                root.style.setProperty('--bg2', '#0c1222');
-                root.style.setProperty('--card', 'rgba(15, 23, 42, 0.78)');
-                root.style.setProperty('--line', 'rgba(148, 163, 184, 0.18)');
-                root.style.setProperty('--txt', '#f1f5f9');
-                root.style.setProperty('--muted', '#94a3b8');
-                root.style.setProperty('--accent', '#38bdf8');
-                root.style.setProperty('--accent2', '#818cf8');
-                root.style.setProperty('--btn-bg', 'rgba(30, 41, 59, 0.45)');
+                root.style.setProperty('--bg', '#000000');
+                root.style.setProperty('--bg2', '#050505');
+                root.style.setProperty('--card', 'rgba(15, 15, 15, 0.9)');
+                root.style.setProperty('--line', 'rgba(80, 80, 80, 0.2)');
+                root.style.setProperty('--txt', '#ffffff');
+                root.style.setProperty('--muted', '#999999');
+                root.style.setProperty('--btn-bg', 'rgba(30, 30, 30, 0.7)');
                 customBgPanel.style.display = 'none';
+                localStorage.setItem(STORAGE_KEYS.THEME, 'dark');
             }
 
-            // Светлая тема
             function setLightTheme() {
                 resetBackground();
-                root.style.setProperty('--bg', '#f8fafc');
-                root.style.setProperty('--bg2', '#e2e8f0');
-                root.style.setProperty('--card', 'rgba(255, 255, 255, 0.85)');
-                root.style.setProperty('--line', 'rgba(100, 116, 139, 0.2)');
-                root.style.setProperty('--txt', '#0f172a');
-                root.style.setProperty('--muted', '#475569');
-                root.style.setProperty('--accent', '#2563eb');
-                root.style.setProperty('--accent2', '#7c3aed');
-                root.style.setProperty('--btn-bg', 'rgba(203, 213, 225, 0.6)');
+                root.style.setProperty('--bg', '#ffffff');
+                root.style.setProperty('--bg2', '#f5f5f5');
+                root.style.setProperty('--card', 'rgba(255, 255, 255, 0.95)');
+                root.style.setProperty('--line', 'rgba(0, 0, 0, 0.1)');
+                root.style.setProperty('--txt', '#111111');
+                root.style.setProperty('--muted', '#555555');
+                root.style.setProperty('--accent', '#0066cc');
+                root.style.setProperty('--accent2', '#5533cc');
+                root.style.setProperty('--btn-bg', 'rgba(240, 240, 240, 0.8)');
                 customBgPanel.style.display = 'none';
+                localStorage.setItem(STORAGE_KEYS.THEME, 'light');
             }
 
-            // Показать панель кастомного фона
             function showCustomPanel() {
                 customBgPanel.style.display = 'flex';
             }
 
-            // Применить КАРТИНКУ как фон (URL или файл)
             function setImageBackground(url) {
                 resetBackground();
                 body.classList.add('custom-bg-active');
                 body.style.setProperty('--custom-bg-url', `url('${url}')`);
-                root.style.setProperty('--card', 'rgba(15, 23, 42, 0.65)');
-                root.style.setProperty('--btn-bg', 'rgba(15, 23, 42, 0.7)');
+                root.style.setProperty('--card', 'rgba(20, 20, 20, 0.7)');
+                root.style.setProperty('--btn-bg', 'rgba(30, 30, 30, 0.7)');
                 root.style.setProperty('--txt', '#ffffff');
-                root.style.setProperty('--muted', '#cbd5e1');
+                root.style.setProperty('--muted', '#cccccc');
+                localStorage.setItem(STORAGE_KEYS.BG_TYPE, 'image');
+                localStorage.setItem(STORAGE_KEYS.BG_DATA, url);
             }
 
-            // Применить ВИДЕО как фон
             function setVideoBackground(url) {
                 resetBackground();
                 videoBg.src = url;
                 videoBg.style.display = 'block';
                 bgOverlay.style.display = 'block';
                 videoBg.play();
-                root.style.setProperty('--card', 'rgba(15, 23, 42, 0.65)');
-                root.style.setProperty('--btn-bg', 'rgba(15, 23, 42, 0.7)');
+                root.style.setProperty('--card', 'rgba(20, 20, 20, 0.7)');
+                root.style.setProperty('--btn-bg', 'rgba(30, 30, 30, 0.7)');
                 root.style.setProperty('--txt', '#ffffff');
-                root.style.setProperty('--muted', '#cbd5e1');
+                root.style.setProperty('--muted', '#cccccc');
+                localStorage.setItem(STORAGE_KEYS.BG_TYPE, 'video');
+                localStorage.setItem(STORAGE_KEYS.BG_DATA, url);
             }
 
-            // Обработчики загрузки файлов
+            // Загрузка файлов из галереи
             imageUpload.addEventListener('change', function(e) {
                 const file = e.target.files[0];
                 if (file) {
                     const url = URL.createObjectURL(file);
-                    bgUrlInput.value = ''; // очищаем поле URL
                     setImageBackground(url);
                 }
             });
@@ -485,63 +498,89 @@ Dmitry Mirnak Adapter
                 const file = e.target.files[0];
                 if (file) {
                     const url = URL.createObjectURL(file);
-                    bgUrlInput.value = '';
                     setVideoBackground(url);
                 }
             });
 
-            // Применить по кнопке (если вставлен URL)
-            applyBgBtn.addEventListener('click', function() {
-                const url = bgUrlInput.value.trim();
-                if (url) {
-                    // Проверяем, видео это или картинка (по расширению)
-                    const videoExt = ['.mp4', '.webm', '.ogg', '.mov'];
-                    const isVideo = videoExt.some(ext => url.toLowerCase().includes(ext));
-                    
-                    if (isVideo) {
-                        setVideoBackground(url);
-                    } else {
-                        setImageBackground(url);
-                    }
-                } else {
-                    alert('Загрузи файл или вставь ссылку');
-                }
-            });
-
-            // Сброс фона
             resetBgBtn.addEventListener('click', function() {
                 setDarkTheme();
-                bgUrlInput.value = '';
             });
 
-            // Привязка кнопок тем
+            // Восстановление фона
+            const savedBgType = localStorage.getItem(STORAGE_KEYS.BG_TYPE);
+            const savedBgData = localStorage.getItem(STORAGE_KEYS.BG_DATA);
+            
+            if (savedBgType === 'image' && savedBgData) {
+                setImageBackground(savedBgData);
+            } else if (savedBgType === 'video' && savedBgData) {
+                setVideoBackground(savedBgData);
+            } else {
+                const savedTheme = localStorage.getItem(STORAGE_KEYS.THEME) || 'dark';
+                if (savedTheme === 'light') {
+                    setLightTheme();
+                } else {
+                    setDarkTheme();
+                }
+            }
+
             themeDark.addEventListener('click', setDarkTheme);
             themeLight.addEventListener('click', setLightTheme);
             themeCustom.addEventListener('click', showCustomPanel);
 
-            // === 3. RANDOM ЦВЕТ ===
+            // === 3. АВТО-СМЕНА ЦВЕТА (RANDOM) ===
             const randomBtn = document.getElementById('randomColorBtn');
+            const autoColorStatus = document.getElementById('autoColorStatus');
             
-            function randomColor() {
+            function generateRandomColor() {
                 const h = Math.floor(Math.random() * 360);
                 const h2 = (h + 40) % 360;
-                const accent = `hsl(${h}, 80%, 60%)`;
-                const accent2 = `hsl(${h2}, 75%, 65%)`;
+                const accent = `hsl(${h}, 85%, 55%)`;
+                const accent2 = `hsl(${h2}, 80%, 60%)`;
                 root.style.setProperty('--accent', accent);
                 root.style.setProperty('--accent2', accent2);
-                
-                const bgHue = (h + 180) % 360;
-                root.style.setProperty('--bg', `hsl(${bgHue}, 25%, 6%)`);
-                root.style.setProperty('--bg2', `hsl(${bgHue}, 20%, 10%)`);
             }
 
-            randomBtn.addEventListener('click', randomColor);
+            function startAutoColor() {
+                if (autoColorInterval) clearInterval(autoColorInterval);
+                autoColorInterval = setInterval(generateRandomColor, 5000);
+                isAutoColorActive = true;
+                autoColorStatus.textContent = '🟢';
+                randomBtn.classList.add('active');
+                localStorage.setItem(STORAGE_KEYS.AUTO_COLOR, 'on');
+            }
 
-            // Enter в поле URL
-            bgUrlInput.addEventListener('keypress', function(e) {
-                if(e.key === 'Enter') {
-                    applyBgBtn.click();
+            function stopAutoColor() {
+                if (autoColorInterval) {
+                    clearInterval(autoColorInterval);
+                    autoColorInterval = null;
                 }
+                isAutoColorActive = false;
+                autoColorStatus.textContent = '⚪';
+                randomBtn.classList.remove('active');
+                localStorage.setItem(STORAGE_KEYS.AUTO_COLOR, 'off');
+            }
+
+            function toggleAutoColor() {
+                if (isAutoColorActive) {
+                    stopAutoColor();
+                } else {
+                    startAutoColor();
+                }
+            }
+
+            randomBtn.addEventListener('click', toggleAutoColor);
+
+            // Восстановление авто-цвета
+            const savedAutoColor = localStorage.getItem(STORAGE_KEYS.AUTO_COLOR);
+            if (savedAutoColor === 'on') {
+                startAutoColor();
+            } else {
+                stopAutoColor();
+            }
+
+            // Ручная смена цвета при двойном клике
+            randomBtn.addEventListener('dblclick', function() {
+                generateRandomColor();
             });
 
         })();
